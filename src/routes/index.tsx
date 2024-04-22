@@ -1,6 +1,7 @@
 // import { useLoaderData, LoaderFunction, MetaFunction } from "remix";
 import { Meta } from "@solidjs/meta";
 import {
+  createAsync,
   RouteDefinition,
   RouteLoadFunc,
   RouteSectionProps,
@@ -43,7 +44,7 @@ const getNewsStories: RouteLoadFunc<Promise<IIndexPageLoader>> = async (
     skip,
     userId
   );
-
+  console.log("getstories", stories);
   return { stories };
 };
 
@@ -54,11 +55,13 @@ export const route = {
 export default function IndexPage(
   props: RouteSectionProps<IIndexPageLoader>
 ): JSX.Element {
-  // const stories = createAsync(() => getNewsStories());
+  // props.
+  const stories = createAsync(() => getNewsStories());
   const pageNumber: number = usePageNumber();
+
   console.log("props", props);
-  console.log();
   // console.log("gg", stories.data);
+
   return (
     <MainLayout>
       <Meta
@@ -66,7 +69,7 @@ export default function IndexPage(
         content="The top stories from technology and startup business hackers around the world."
       />
       <NewsFeed
-        stories={props.data}
+        stories={stories}
         pageNumber={pageNumber}
         postsPerPage={POSTS_PER_PAGE}
       />

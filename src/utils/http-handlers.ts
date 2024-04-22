@@ -16,8 +16,8 @@ export enum URLSearchParamHowValue {
 }
 
 export function getSearchParamsFromRequest(request: RouteLoadFuncArgs) {
-  return request.location.search;
-  // return new URL(request.url).searchParams;
+  // return request.location.search;
+  return new URL(request.url).searchParams;
 }
 
 function isAsserted(value: any): boolean {

@@ -7,7 +7,7 @@ import { URLSearchParamFields } from "./http-handlers";
 export function getPageNumberFromSearchParams<
   TParams extends Record<URLSearchParamFields, any>,
 >(searchParams: TParams): number {
-  console.log(searchParams);
+  console.log("searchparams pagenumber", searchParams);
   const p = searchParams[URLSearchParamFields.PAGE];
   const pageNumber: number = +(p || 1);
 

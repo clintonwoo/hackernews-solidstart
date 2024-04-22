@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { children, JSX } from "solid-js";
 
 import yc500Gif from "/static/yc500.gif";
 
@@ -7,7 +7,7 @@ export interface INoticeLayoutProps {
 }
 
 export function NoticeLayout(props: INoticeLayoutProps): JSX.Element {
-  const { children } = props;
+  const getChildren = children(() => props.children);
 
   return (
     <div>
@@ -34,7 +34,7 @@ export function NoticeLayout(props: INoticeLayoutProps): JSX.Element {
               </a>
               <br />
               <br />
-              {children}
+              {getChildren()}
             </td>
           </tr>
         </tbody>

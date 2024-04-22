@@ -23,11 +23,7 @@ export function HeaderLinks(props: IHeaderNavProps): JSX.Element {
           {" | "}
         </>
       )}
-      <A
-        class={currentUrl === "/newest" ? "topsel" : ""}
-        prefetch="intent"
-        href="/newest"
-      >
+      <A class={currentUrl === "/newest" ? "topsel" : ""} href="/newest">
         new
       </A>
       {userId && (

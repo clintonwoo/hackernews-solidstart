@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { children, JSX, mergeProps } from "solid-js";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 
@@ -11,12 +11,15 @@ interface IMainLayoutProps {
 }
 
 export function MainLayout(props: IMainLayoutProps): JSX.Element {
-  const {
-    children,
-    isNavVisible = true,
-    isFooterVisible = true,
-    title = "Hacker News",
-  } = props;
+  const defaultProps = mergeProps(
+    {
+      isNavVisible: true,
+      isFooterVisible: true,
+      title: "Hacker News",
+    },
+    props
+  );
+  const getChildren = children(() => props.children);
 
   return (
     <div>
@@ -34,10 +37,13 @@ export function MainLayout(props: IMainLayoutProps): JSX.Element {
         }}
       >
         <tbody>
-          <Header isNavVisible={!!isNavVisible} title={title!} />
+          <Header
+            isNavVisible={!!defaultProps.isNavVisible}
+            title={defaultProps.title!}
+          />
           <tr style={{ height: "10px" }} />
-          {children}
-          {isFooterVisible && <Footer />}
+          {getChildren()}
+          {defaultProps.isFooterVisible && <Footer />}
         </tbody>
       </table>
     </div>

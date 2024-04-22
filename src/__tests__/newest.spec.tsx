@@ -1,9 +1,9 @@
 /** @jest-environment jsdom */
 
-import Page from '../routes/__main/newest';
+import Page from "../routes/newest";
 
-describe('Newest Posts Page', () => {
-  it('has default export', () => {
+describe("Newest Posts Page", () => {
+  it("has default export", () => {
     expect(Page).toBeDefined();
   });
 });

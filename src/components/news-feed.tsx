@@ -20,7 +20,6 @@ export interface INewsFeedProps {
 }
 
 export function NewsFeed(props: INewsFeedProps): JSX.Element {
-  const currentPathname = useCurrentPathname();
   console.log("stories", props.stories);
 
   return (
@@ -53,7 +52,8 @@ export function NewsFeed(props: INewsFeedProps): JSX.Element {
               <tbody>
                 {props.notice}
                 <For
-                  each={props.stories.filter(
+                  // each={[]}
+                  each={props.stories?.filter(
                     (newsItem): newsItem is IStory =>
                       !!newsItem && !newsItem.hidden
                   )}
@@ -95,7 +95,7 @@ export function NewsFeed(props: INewsFeedProps): JSX.Element {
                   <td colSpan={2} />
                   <td class="title">
                     <a
-                      href={`${currentPathname}?p=${props.pageNumber + 1}`}
+                      href={`${useCurrentPathname()}?p=${props.pageNumber + 1}`}
                       class="morelink"
                       rel="nofollow"
                     >
