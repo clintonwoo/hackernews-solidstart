@@ -2,6 +2,8 @@ import { children, JSX, mergeProps } from "solid-js";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 
+import "../assets/news.css";
+
 interface IMainLayoutProps {
   children: JSX.Element;
   isNavVisible?: boolean;
