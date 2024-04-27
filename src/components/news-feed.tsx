@@ -61,7 +61,7 @@ export function NewsFeed(props: INewsFeedProps): JSX.Element {
                   {(newsItem, index) => (
                     <>
                       <ItemTitle
-                        key={`${newsItem.id}title`}
+                        // key={`${newsItem.id}title`}
                         id={newsItem.id}
                         isRankVisible={props.isRankVisible}
                         isUpvoteVisible={props.isUpvoteVisible}
@@ -75,7 +75,7 @@ export function NewsFeed(props: INewsFeedProps): JSX.Element {
                         url={newsItem.url}
                       />
                       <ItemDetail
-                        key={`${newsItem.id}detail`}
+                        // key={`${newsItem.id}detail`}
                         commentCount={newsItem.commentCount}
                         creationTime={newsItem.creationTime}
                         hidden={newsItem.hidden}

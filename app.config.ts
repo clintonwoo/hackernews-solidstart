@@ -1,3 +1,6 @@
 import { defineConfig } from "@solidjs/start/config";
 
-export default defineConfig({});
+export default defineConfig({
+  server: { prerender: { crawlLinks: true, routes: ["/"] } },
+  ssr: true,
+});

@@ -1,6 +1,5 @@
 import { Title } from "@solidjs/meta";
-import { createAsync } from "@solidjs/router";
-import { GET } from "@solidjs/start";
+import { createAsync, RouteDefinition } from "@solidjs/router";
 import { APIEvent } from "@solidjs/start/server";
 import { JSX } from "solid-js";
 
@@ -18,19 +17,39 @@ import type { IStory } from "../server/responses";
 export interface INewestPageLoader {
   stories: (void | IStory)[];
 }
-const getNewStories = GET(async (e: APIEvent): Promise<INewestPageLoader> => {
+// const getNewStories = GET(async (e: APIEvent): Promise<INewestPageLoader> => {
+//   // const session = await getSession(request.headers.get("Cookie"));
+//   // const userId = session.get(SessionCookieProperties.USER_ID);
+//   "use server";
+//   // e.request.url;
+//   const session = await getSession();
+//   console.log("get new stories session", session);
+
+//   const userId = session.data[SessionCookieProperties.USER_ID];
+
+//   console.log("gg", e);
+//   const searchParams = getSearchParamsFromRequest(e.request);
+//   const pageNumber: number = getPageNumberFromSearchParams(searchParams);
+//   console.log("get new stories", pageNumber);
+
+//   const first = POSTS_PER_PAGE;
+//   const skip = POSTS_PER_PAGE * ((pageNumber ?? 1) - 1);
+
+//   return {
+//     stories: await feedService.getForType(FeedType.NEW, first, skip, userId),
+//   };
+// });
+const getNewStories = async (req: APIEvent): Promise<INewestPageLoader> => {
   // const session = await getSession(request.headers.get("Cookie"));
   // const userId = session.get(SessionCookieProperties.USER_ID);
   "use server";
-  e.request.url;
+  // e.request.url;
   const session = await getSession();
-  console.log("get new stories session", session);
 
   const userId = session.data[SessionCookieProperties.USER_ID];
 
-  const searchParams = getSearchParamsFromRequest(e.request);
+  const searchParams = getSearchParamsFromRequest(req);
   const pageNumber: number = getPageNumberFromSearchParams(searchParams);
-  console.log("get new stories", pageNumber);
 
   const first = POSTS_PER_PAGE;
   const skip = POSTS_PER_PAGE * ((pageNumber ?? 1) - 1);
@@ -38,24 +57,22 @@ const getNewStories = GET(async (e: APIEvent): Promise<INewestPageLoader> => {
   return {
     stories: await feedService.getForType(FeedType.NEW, first, skip, userId),
   };
-});
+};
 
-// export const route = {
-//   load: getNewStories,
-// } satisfies RouteDefinition;
+export const route = {
+  load: getNewStories,
+} satisfies RouteDefinition;
 
-export default function NewestPage(): JSX.Element {
+export default function NewestPage(props): JSX.Element {
   const pageNumber: number = usePageNumber();
-  const stories = createAsync<INewestPageLoader>(() =>
-    getNewStories(pageNumber)
-  );
+  const stories = createAsync<INewestPageLoader>(() => props.data);
 
   // return <div>50</div>;
   return (
     <MainLayout>
       <Title>New Links | Hacker News Clone</Title>
       <NewsFeed
-        stories={stories()}
+        stories={stories()?.stories}
         pageNumber={pageNumber}
         postsPerPage={POSTS_PER_PAGE}
       />

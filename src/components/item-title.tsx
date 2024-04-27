@@ -39,7 +39,7 @@ export function ItemTitle(props: IItemTitleProps): JSX.Element {
         <div style={{ "text-align": "center" }}>
           {defaultProps.isUpvoteVisible && (
             <A
-              class={props.upvoted ? "nosee" : " "}
+              classList={{ nosee: props.upvoted }}
               href={`/vote?id=${props.id}&how=up&goto=${loc.pathname + loc.search}`}
               style={{ cursor: "pointer" }}
             >

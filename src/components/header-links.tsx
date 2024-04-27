@@ -23,14 +23,14 @@ export function HeaderLinks(props: IHeaderNavProps): JSX.Element {
           {" | "}
         </>
       )}
-      <A class={currentUrl === "/newest" ? "topsel" : ""} href="/newest">
+      <A classList={{ topsel: currentUrl === "/newest" }} href="/newest">
         new
       </A>
       {userId && (
         <>
           {" | "}
           <A
-            class={currentUrl === "/threads" ? "topsel" : ""}
+            classList={{ topsel: currentUrl === "/threads" }}
             prefetch="intent"
             href={`/threads?id=${userId}`}
           >
@@ -40,7 +40,7 @@ export function HeaderLinks(props: IHeaderNavProps): JSX.Element {
       )}
       {" | "}
       <A
-        class={currentUrl === "/newcomments" ? "topsel" : ""}
+        classList={{ topsel: currentUrl === "/newcomments" }}
         prefetch="intent"
         href="/newcomments"
       >
@@ -48,7 +48,7 @@ export function HeaderLinks(props: IHeaderNavProps): JSX.Element {
       </A>
       {" | "}
       <A
-        class={currentUrl === "/show" ? "topsel" : ""}
+        classList={{ topsel: currentUrl === "/show" }}
         prefetch="intent"
         href="/show"
       >
@@ -56,7 +56,7 @@ export function HeaderLinks(props: IHeaderNavProps): JSX.Element {
       </A>
       {" | "}
       <A
-        class={currentUrl === "/ask" ? "topsel" : ""}
+        classList={{ topsel: currentUrl === "/ask" }}
         prefetch="intent"
         href="/ask"
       >
@@ -64,14 +64,14 @@ export function HeaderLinks(props: IHeaderNavProps): JSX.Element {
       </A>
       {" | "}
       <A
-        class={currentUrl === "/jobs" ? "topsel" : ""}
+        classList={{ topsel: currentUrl === "/jobs" }}
         prefetch="intent"
         href="/jobs"
       >
         jobs
       </A>
       {" | "}
-      <A class={currentUrl === "/submit" ? "topsel" : ""} href="/submit">
+      <A classList={{ topsel: currentUrl === "/submit" }} href="/submit">
         submit
       </A>
       {currentUrl === "/best" && (

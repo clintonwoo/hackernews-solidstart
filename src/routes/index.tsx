@@ -32,6 +32,7 @@ const getNewsStories: RouteLoadFunc<Promise<IIndexPageLoader>> = async (
   console.log(session);
   const userId = session.data[SessionCookieProperties.USER_ID];
 
+  console.log(request);
   const searchParams = getSearchParamsFromRequest(request);
   const pageNumber: number = getPageNumberFromSearchParams(searchParams);
 
@@ -56,7 +57,9 @@ export default function IndexPage(
   props: RouteSectionProps<IIndexPageLoader>
 ): JSX.Element {
   // props.
-  const stories = createAsync(() => getNewsStories());
+  // const stories = createAsync(() => getNewsStories());
+
+  const stories = createAsync(() => props.data);
   const pageNumber: number = usePageNumber();
 
   console.log("props", props);
@@ -69,7 +72,7 @@ export default function IndexPage(
         content="The top stories from technology and startup business hackers around the world."
       />
       <NewsFeed
-        stories={stories}
+        stories={stories()?.stories}
         pageNumber={pageNumber}
         postsPerPage={POSTS_PER_PAGE}
       />
